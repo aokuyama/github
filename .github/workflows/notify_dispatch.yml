@@ -1,0 +1,24 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        type: string
+        required: true
+      description:
+        type: string
+        required: true
+
+jobs:
+  output:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print inputs
+        run: |
+          echo "title: ${{ github.event.inputs.title }}"
+          echo "description: ${{ github.event.inputs.description }}"
+          echo "title: ${{ github.event.inputs.title }}" >> $GITHUB_OUTPUT
+          echo "description: ${{ github.event.inputs.description }}" >> $GITHUB_OUTPUT
+
