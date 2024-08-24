@@ -51,7 +51,6 @@ jobs:
           task-definition: task-definition.json
           container-name: ${{ vars.AWS_ECS_CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
-          task-definition-revision: ${{ github.sha }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
