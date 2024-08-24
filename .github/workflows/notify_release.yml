@@ -1,0 +1,34 @@
+name: release notify
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - release
+
+jobs:
+  notify-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - name: Slack notification
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "test",
+              "attachments": [{
+                "color": "#10AA39",
+                "fields": [
+                  {
+                    "title": "${{ github.event.pull_request.title }}",
+                    "value": "${{ github.event.pull_request.html_url }}"
+                  },
+                ]
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
