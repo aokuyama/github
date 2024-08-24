@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Slack notification
-        uses: slackapi/slack-github-action@v1.24.0
+        uses: slackapi/slack-github-action@v1.26.0
         with:
           payload: |
             {
@@ -25,10 +25,9 @@ jobs:
                   {
                     "title": "${{ github.event.pull_request.title }}",
                     "value": "${{ github.event.pull_request.html_url }}"
-                  },
+                  }
                 ]
               }]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
